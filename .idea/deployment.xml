@@ -5,8 +5,19 @@
       <paths name="WSL (55ad43ca-c0e2-4716-8bce-23c5505c202c)">
         <serverdata>
           <mappings>
-            <mapping local="$PROJECT_DIR$" web="/" />
+            <mapping deploy="/root/" local="$PROJECT_DIR$" web="/" />
           </mappings>
+        </serverdata>
+      </paths>
+      <paths name="mymanjaro (dfe0e0c9-65df-4af2-a48e-9a80a49e4f86)">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/home/zhangliao/fileattr" local="$PROJECT_DIR$" />
+          </mappings>
+          <excludedPaths>
+            <excludedPath local="true" path="$PROJECT_DIR$/cmake-build-debug-mymanjaro" />
+            <excludedPath local="true" path="$PROJECT_DIR$/cmake-build-debug-mymanjaro" />
+          </excludedPaths>
         </serverdata>
       </paths>
       <paths name="myubuntu (d9d15640-6c2b-4d34-933c-782b6a5bb7ed)">
@@ -14,6 +25,10 @@
           <mappings>
             <mapping local="$PROJECT_DIR$" web="/" />
           </mappings>
+          <excludedPaths>
+            <excludedPath local="true" path="$PROJECT_DIR$/cmake-build-debug-mymanjaro" />
+            <excludedPath local="true" path="$PROJECT_DIR$/.idea" />
+          </excludedPaths>
         </serverdata>
       </paths>
     </serverData>
