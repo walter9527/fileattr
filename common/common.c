@@ -30,3 +30,17 @@ int my_fstat(int fd, struct stat *statbuf) {
     is_err(ret, "fstat");
     return ret;
 }
+
+int my_truncate(const char *path, off_t length)
+{
+	int ret = truncate(path, length);
+	is_err(ret, "truncate");
+	return ret;
+}
+
+int my_ftruncate(int filds, off_t length)
+{
+	int ret = ftruncate(filds, length);
+	is_err(ret, "ftruncate");
+	return ret;
+}
