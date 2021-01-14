@@ -25,5 +25,8 @@ extern int my_lstat(const char *pathname, struct stat *statbuf);
 extern int my_fstat(int fd, struct stat *statbuf);
 extern int my_truncate(const char *path, off_t length);
 extern int my_ftruncate(int filds, off_t length);
-
+extern int my_link(const char *oldpath, const char *newpath);
+extern int my_unlink(const char *pathname);
+extern int my_remove(const char *pathname);
+extern int my_rename(const char *oldpath, const char *newpath);
 #endif //FILEATTR_COMMON_H

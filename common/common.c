@@ -44,3 +44,31 @@ int my_ftruncate(int filds, off_t length)
 	is_err(ret, "ftruncate");
 	return ret;
 }
+
+int my_link(const char *oldpath, const char *newpath)
+{
+	int ret = link(oldpath, newpath);
+	is_err(ret, "link");
+	return ret;
+}
+
+int my_unlink(const char *pathname)
+{
+	int ret = unlink(pathname);
+	is_err(ret, "unlink");
+	return ret;
+}
+
+int my_remove(const char *pathname)
+{
+	int ret = remove(pathname);
+	is_err(ret, "remove");
+	return ret;
+}
+
+int my_rename(const char *oldpath, const char *newpath)
+{
+	int ret = rename(oldpath, newpath);
+	is_err(ret, "rename");
+	return ret;
+}
