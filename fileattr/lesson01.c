@@ -50,25 +50,32 @@ void get_file_permission(const struct stat *statbuf, char *pmss) {
 
 // 从路径中提取文件名
 char *get_file_name(const char *pathname) {
-    return strrchr(pathname, '/') + 1;
+	char *file_name = strrchr(pathname, '/');
+	if (file_name != NULL) {
+		if (!strcmp(file_name, strchr(pathname, '/'))) {
+			return file_name + 1;	
+		}
+	}
+    return (char *)pathname;
 }
 
 void test01(const char *pathname, int argc) {
     struct stat statbuf;
 
+    int fd = open(pathname, O_RDONLY);
+    if (fd == -1) {
+	    perror("open err");
+	    return;
+    }	
+
     // 获取文件属性
 //    my_stat(pathname, &statbuf);
 //    my_lstat(pathname, &statbuf);
 	// 获取文件描述符, 用于fstat 获取属性	
-    int fd = open(pathname, O_RDONLY);
-	if (fd == -1) {
-		perror("open err!");
-		return;
-	}	
-
     my_lstat(pathname, &statbuf);
     if (argc == 2) {
-        printf("%s\n", pathname);
+	    char *file_name = get_file_name(pathname);
+        printf("%s\n", file_name);
         return;
     }
 
@@ -86,11 +93,21 @@ void test01(const char *pathname, int argc) {
     // 上次修改时间
     struct timespec mtim = statbuf.st_mtim;
 
+    // 获取文件类型
+    char file_type = get_file_type(&statbuf);
+
     // 获取文件名
     char *file_name = get_file_name(pathname);
 
-    // 获取文件类型
-    char file_type = get_file_type(&statbuf);
+	// 根据文件类型修饰文件名
+    if (file_type == 'l') {
+	    char buf[256] = "";
+	    my_readlink(pathname, buf, sizeof(buf));
+	  	strcat(file_name, " -> ");
+	  	strcat(file_name, buf);
+    } else if (file_type == 'd') {
+		strcat(file_name, "/");
+	}
 
     // 获取文件权限
     char pmss[11] = {file_type};
@@ -100,8 +117,6 @@ void test01(const char *pathname, int argc) {
             uid, gid, size, mtim.tv_sec, file_name);
 
     printf("%s\n", buf);
-	
-	
 }
 
 void iter_dir(const char *file_path, int argc)

@@ -72,3 +72,18 @@ int my_rename(const char *oldpath, const char *newpath)
 	is_err(ret, "rename");
 	return ret;
 }
+
+int my_symlink(const char *oldpath, const char *newpath)
+{
+	int ret = symlink(oldpath, newpath);
+	is_err(ret, "symlink");
+	return ret;
+}
+
+
+ssize_t my_readlink(const char *restrict path, char *restrict buf, size_t bufsize)
+{
+	ssize_t ret = readlink(path, buf, bufsize);
+	is_err(ret, "readlink");
+	return ret;
+}

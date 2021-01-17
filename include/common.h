@@ -29,4 +29,7 @@ extern int my_link(const char *oldpath, const char *newpath);
 extern int my_unlink(const char *pathname);
 extern int my_remove(const char *pathname);
 extern int my_rename(const char *oldpath, const char *newpath);
+extern int my_symlink(const char *oldpath, const char *newpath);
+extern ssize_t my_readlink(const char *restrict path, char *restrict buf, size_t bufsize);
+
 #endif //FILEATTR_COMMON_H
