@@ -87,3 +87,15 @@ ssize_t my_readlink(const char *restrict path, char *restrict buf, size_t bufsiz
 	is_err(ret, "readlink");
 	return ret;
 }
+
+int my_chdir(const char *path) {
+	int ret = chdir(path);
+	is_err(ret, "chdir");
+	return ret;
+}
+
+int my_rmdir (const char *path) {
+	int ret = rmdir(path);
+	is_err(ret, "rmdir");
+	return ret;
+}

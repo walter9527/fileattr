@@ -30,6 +30,9 @@ extern int my_unlink(const char *pathname);
 extern int my_remove(const char *pathname);
 extern int my_rename(const char *oldpath, const char *newpath);
 extern int my_symlink(const char *oldpath, const char *newpath);
-extern ssize_t my_readlink(const char *restrict path, char *restrict buf, size_t bufsize);
+extern ssize_t my_readlink(const char *restrict path, char *restrict buf
+	, size_t bufsize);
+extern int my_chdir(const char *path);
+extern int my_rmdir (const char *path);
 
 #endif //FILEATTR_COMMON_H

@@ -26,4 +26,4 @@ SET(EXECUTABLE_OUTPUT_PATH ${HOME})
 #    RUNTIME_OUTPUT_DIRECTORY "/home/zhangliao/"
 #)
 
-add_executable(fileattr fileattr/lesson01.c ${DIR_COMMON})
+add_executable(fileattr fileattr/lesson14_rmdir.c ${DIR_COMMON})
