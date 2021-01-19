@@ -88,14 +88,33 @@ ssize_t my_readlink(const char *restrict path, char *restrict buf, size_t bufsiz
 	return ret;
 }
 
-int my_chdir(const char *path) {
+int my_chdir(const char *path) 
+{
 	int ret = chdir(path);
 	is_err(ret, "chdir");
 	return ret;
 }
 
-int my_rmdir (const char *path) {
+int my_rmdir (const char *path)
+{
 	int ret = rmdir(path);
 	is_err(ret, "rmdir");
+	return ret;
+}
+
+DIR *my_opendir(const char *name) 
+{
+	DIR *dirp = opendir(name);
+	if (dirp == NULL) {
+		perror("opendir err");
+		exit(-1);
+	}
+	return dirp;
+}
+
+int chmod(const char *path, mode_t mode) 
+{
+	int ret = my_chmod(path, mode);
+	is_err(ret, "chmod");
 	return ret;
 }

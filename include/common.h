@@ -34,5 +34,7 @@ extern ssize_t my_readlink(const char *restrict path, char *restrict buf
 	, size_t bufsize);
 extern int my_chdir(const char *path);
 extern int my_rmdir (const char *path);
+extern DIR *my_opendir(const char *name); 
+extern int chmod(const char *path, mode_t mode);
 
 #endif //FILEATTR_COMMON_H

@@ -59,7 +59,7 @@ char *get_file_name(const char *pathname) {
     return (char *)pathname;
 }
 
-void test01(const char *pathname, int argc) {
+void get_info(const char *pathname, int argc) {
     struct stat statbuf;
 
     int fd = open(pathname, O_RDONLY);
@@ -128,11 +128,11 @@ void iter_dir(const char *file_path, int argc)
         while ((entry = readdir(dir))) {
             char sub_file[256] = "";
             sprintf(sub_file, "%s/%s", file_path, entry->d_name);
-            test01(sub_file, argc);
+            get_info(sub_file, argc);
         }
         closedir(dir);
     } else {
-		test01(file_path, argc);
+		get_info(file_path, argc);
     }
 }
 
