@@ -59,6 +59,26 @@ char *get_file_name(const char *pathname) {
     return (char *)pathname;
 }
 
+// 获取上次修改时间
+void get_last_modtime(struct stat *st, char *buf, int size)
+{
+    struct timespec mtim = st->st_mtim;
+
+    time_t t = time(NULL);
+    struct tm *cur_time = localtime(&t);
+    struct tm curtime;
+    memcpy(&curtime, cur_time, sizeof(*cur_time));
+
+   
+    struct tm *tm = localtime(&(mtim.tv_sec));
+
+    if (tm->tm_year != curtime.tm_year) {
+        strftime(buf, size, "%_2m月 %_2d %Y", tm);
+    } else {
+        strftime(buf, size, "%_2m月 %_2d %H:%M", tm);
+    }
+}
+
 void get_info(const char *pathname, int argc) {
     struct stat statbuf;
 
@@ -96,7 +116,8 @@ void get_info(const char *pathname, int argc) {
     // 文件大小
     off_t size = statbuf.st_size;
     // 上次修改时间
-    struct timespec mtim = statbuf.st_mtim;
+    char last_mtim[128] = "";
+    get_last_modtime(&statbuf, last_mtim, 128);
 
     // 获取文件类型
     char file_type = get_file_type(&statbuf);
@@ -118,8 +139,8 @@ void get_info(const char *pathname, int argc) {
     char pmss[11] = {file_type};
     get_file_permission(&statbuf, pmss);
 	
-    sprintf(buf, "%s %2lu %s %s %5ld %ld %s", pmss, nlink, \
-            username, groupname, size, mtim.tv_sec, file_name);
+    sprintf(buf, "%s %2lu %s %s %5ld %s %s", pmss, nlink, \
+            username, groupname, size, last_mtim, file_name);
 
     printf("%s\n", buf);
 }
