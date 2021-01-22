@@ -20,6 +20,8 @@
 
 #include <fcntl.h>
 
+#include <pwd.h>
+
 extern int my_stat(const char *pathname, struct stat *statbuf);
 extern int my_lstat(const char *pathname, struct stat *statbuf);
 extern int my_fstat(int fd, struct stat *statbuf);

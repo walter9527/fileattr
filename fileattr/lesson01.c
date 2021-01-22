@@ -85,7 +85,8 @@ void get_info(const char *pathname, int argc) {
     // 硬链接数
     nlink_t nlink = statbuf.st_nlink;
     // 用户id
-    uid_t uid = statbuf.st_uid;
+    //uid_t uid = statbuf.st_uid;
+    char *username = (getpwuid(statbuf.st_uid))->pw_name;
     // 组id
     gid_t gid = statbuf.st_gid;
     // 文件大小
@@ -113,8 +114,8 @@ void get_info(const char *pathname, int argc) {
     char pmss[11] = {file_type};
     get_file_permission(&statbuf, pmss);
 	
-    sprintf(buf, "%s %2lu %4u %4u %5ld %ld %s", pmss, nlink, \
-            uid, gid, size, mtim.tv_sec, file_name);
+    sprintf(buf, "%s %2lu %s %4u %5ld %ld %s", pmss, nlink, \
+            username, gid, size, mtim.tv_sec, file_name);
 
     printf("%s\n", buf);
 }

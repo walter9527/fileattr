@@ -112,9 +112,9 @@ DIR *my_opendir(const char *name)
 	return dirp;
 }
 
-int chmod(const char *path, mode_t mode) 
+int my_chmod(const char *path, mode_t mode) 
 {
-	int ret = my_chmod(path, mode);
+	int ret = chmod(path, mode);
 	is_err(ret, "chmod");
 	return ret;
 }
